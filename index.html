@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Trabajo académico sobre Fundamentos de la Dirección Administrativa - UNAH" />
+  <title>Fundamentos de la Dirección Administrativa | UNAH</title>
+  <style>
+    :root {
+      --azul: #071d3a;
+      --azul-claro: #123c69;
+      --dorado: #d7ae55;
+      --crema: #f7f3e8;
+      --blanco: #ffffff;
+      --texto: #1d2733;
+      --gris: #67717c;
+      --borde: #dce3ea;
+      --sombra: 0 18px 45px rgba(4, 22, 45, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--texto);
+      background:
+        radial-gradient(circle at 10% 5%, rgba(215, 174, 85, 0.13), transparent 28%),
+        linear-gradient(180deg, #eef3f8 0%, #f8fafc 42%, #eef2f6 100%);
+    }
+
+    a { color: inherit; }
+
+    .topbar {
+      min-height: 72px;
+      padding: 14px clamp(20px, 5vw, 72px);
+      background: rgba(7, 29, 58, 0.96);
+      color: var(--blanco);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: white;
+      padding: 3px;
+    }
+
+    .topbar nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .topbar a {
+      text-decoration: none;
+      font-size: 0.92rem;
+      padding: 9px 13px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .topbar nav a:hover { background: rgba(255,255,255,0.12); }
+
+    .hero {
+      padding: clamp(54px, 8vw, 105px) clamp(20px, 6vw, 88px) 70px;
+      background:
+        linear-gradient(110deg, rgba(7, 29, 58, 0.97), rgba(18, 60, 105, 0.88)),
+        url("assets/logo-unah.png") center/cover no-repeat;
+      color: var(--blanco);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      right: -90px;
+      top: -140px;
+      border-radius: 50%;
+      border: 45px solid rgba(215, 174, 85, 0.13);
+    }
+
+    .hero-grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #f8d98e;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 35px;
+      height: 2px;
+      background: var(--dorado);
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.35rem, 5vw, 4.8rem);
+      line-height: 1.03;
+      margin: 0 0 22px;
+      max-width: 820px;
+    }
+
+    .hero p {
+      max-width: 680px;
+      font-size: clamp(1rem, 1.6vw, 1.18rem);
+      line-height: 1.75;
+      color: rgba(255,255,255,0.83);
+      margin: 0;
+    }
+
+    .hero-logo {
+      justify-self: center;
+      width: min(290px, 80%);
+      aspect-ratio: 1 / 1;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(255,255,255,0.45);
+      border-radius: 32px;
+      padding: 30px;
+      box-shadow: 0 22px 50px rgba(0,0,0,0.28);
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-logo img { width: 100%; height: 100%; object-fit: contain; }
+
+    main {
+      max-width: 1180px;
+      margin: -34px auto 0;
+      padding: 0 20px 70px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.97);
+      border: 1px solid rgba(220, 227, 234, 0.9);
+      border-radius: 24px;
+      box-shadow: var(--sombra);
+    }
+
+    .info-card {
+      padding: clamp(26px, 4vw, 46px);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 42px;
+    }
+
+    .section-title {
+      margin: 0 0 9px;
+      font-size: clamp(1.5rem, 3vw, 2.15rem);
+      color: var(--azul);
+    }
+
+    .section-copy {
+      margin: 0;
+      color: var(--gris);
+      line-height: 1.7;
+    }
+
+    .meta-list {
+      display: grid;
+      gap: 15px;
+      margin-top: 26px;
+    }
+
+    .meta-item {
+      padding: 15px 17px;
+      border-left: 4px solid var(--dorado);
+      background: #f7f9fc;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .meta-item small {
+      display: block;
+      color: var(--gris);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .team {
+      overflow: hidden;
+      border: 1px solid var(--borde);
+      border-radius: 18px;
+    }
+
+    .team-head, .team-row {
+      display: grid;
+      grid-template-columns: 1fr 155px;
+      gap: 18px;
+      padding: 14px 18px;
+      align-items: center;
+    }
+
+    .team-head {
+      background: var(--azul);
+      color: white;
+      font-weight: 800;
+    }
+
+    .team-row:nth-child(odd) { background: #f7f9fb; }
+    .team-row span:last-child { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--azul-claro); }
+
+    .document-section {
+      margin-top: 34px;
+      padding: clamp(22px, 3vw, 34px);
+    }
+
+    .document-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      font-weight: 800;
+      border-radius: 12px;
+      padding: 12px 17px;
+      background: var(--dorado);
+      color: #1b2430;
+      box-shadow: 0 8px 20px rgba(215, 174, 85, 0.28);
+    }
+
+    .viewer {
+      width: 100%;
+      height: min(78vh, 920px);
+      min-height: 600px;
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #e6ebf0;
+    }
+
+    .viewer object, .viewer iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .fallback {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 30px;
+      color: var(--gris);
+    }
+
+    footer {
+      padding: 28px 20px 45px;
+      text-align: center;
+      color: var(--gris);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 820px) {
+      .hero-grid, .info-card { grid-template-columns: 1fr; }
+      .hero-logo { width: 210px; }
+      .hero { text-align: center; }
+      .eyebrow { justify-content: center; }
+      .hero p { margin-inline: auto; }
+      .viewer { min-height: 520px; height: 72vh; }
+    }
+
+    @media (max-width: 560px) {
+      .topbar { position: static; align-items: flex-start; }
+      .topbar nav { display: none; }
+      .team-head, .team-row { grid-template-columns: 1fr; gap: 4px; }
+      .team-head span:last-child { display: none; }
+      .team-row span:last-child::before { content: "Cuenta: "; color: var(--gris); font-weight: 600; }
+      .viewer { min-height: 440px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/logo-unah.png" alt="Logo de la UNAH" />
+      <span>UNAH · Desarrollo Gerencial</span>
+    </div>
+    <nav aria-label="Navegación principal">
+      <a href="#portada">Portada</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#documento">Documento</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="portada">
+    <div class="hero-grid">
+      <div>
+        
+        <h1>Fundamentos de la Dirección Administrativa</h1>
+        
+      </div>
+      <div class="hero-logo">
+        <img src="assets/logo-unah.png" alt="Escudo y logotipo de la Universidad Nacional Autónoma de Honduras" />
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="card info-card" id="equipo">
+      <div>
+        <h2 class="section-title">Información académica</h2>
+        
+        <div class="meta-list">
+          <div class="meta-item">
+            <small>Universidad</
+            Universidad Nacional Autónoma de Honduras
+          </div>
+          <div class="meta-item">
+            <small>Asignatura</small>
+            Desarrollo Gerencial - Tele docencia
+          </div>
+          <div class="meta-item">
+            <small>Catedrático</small>
+            Abog. Noe Heriberto Owen García
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="section-title">Equipo de trabajo</h2>
+        <p class="section-copy" style="margin-bottom: 20px;">Integrantes y números de cuenta.</p>
+        <div class="team" role="table" aria-label="Equipo de trabajo">
+          <div class="team-head" role="row">
+            <span role="columnheader">Integrante</span>
+            <span role="columnheader">N.º de cuenta</span>
+          </div>
+          <div class="team-row" role="row"><span>Ana Arely Melendez Bejarano</span><span>20232000150</span></div>
+          <div class="team-row" role="row"><span>Iveth Carolina Cruz</span><span>20131005076</span></div>
+          <div class="team-row" role="row"><span>Nehemías Michael González</span><span>20231032910</span></div>
+          <div class="team-row" role="row"><span>Fanny Jackeline Mejía</span><span>20242031154</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card document-section" id="documento">
+      <div class="document-head">
+        <div>
+          <h2 class="section-title">Documento completo</h2>
+          <p class="section-copy">Puede visualizarse directamente en esta página.</p>
+        </div>
+        <a class="btn" href="documento.pdf" target="_blank" rel="noopener">Abrir PDF en otra pestaña</a>
+      </div>
+
+      <div class="viewer">
+        <object data="documento.pdf#view=FitH" type="application/pdf">
+          <div class="fallback">
+            <p>
+              El navegador no pudo mostrar el PDF.<br />
+              <a class="btn" href="documento.pdf" target="_blank" rel="noopener">Ver documento</a>
+            </p>
+          </div>
+        </object>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Universidad Nacional Autónoma de Honduras · Trabajo académico de Desarrollo Gerencial
+  </footer>
+</body>
+</html>
